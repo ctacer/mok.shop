@@ -1,39 +1,35 @@
 
-registry = require (__dirname + "/utils/registry.js");
+registry = new (require (__dirname + "/libs/registry.js")) ();
 registry.set ('dir', __dirname);
 registry.set ('config', require (__dirname + "/config/server.config.js") (process.argv[2]) );
 registry.set ('log', require('nlogger').logger(module) );
+registry.set ('errorsListener', require(__dirname + '/libs/errors_listener.js') (global.registry.get('log')) );
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+
+registry.set ('indexRoute', require('./routes/index_route.js'));
+registry.set ('userRoute', require('./routes/user_route.js'));
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || registry.get ('config').server.port );
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
-app.use(express.session());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+//Uncaught errors isolation
+process.on('uncaughtException', function (err) {
+    registry.get('errorsListener').handleUncaughtException(err);
+});
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+
+require (__dirname + '/routes/route_builder.js') (app, registry.get ('config').routes);
+
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  registry.get ('log').debug ('Express server listening on port ' + app.get('port'));
 });

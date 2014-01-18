@@ -5,6 +5,10 @@ var config = {
 
     },
     "development" : {
+        "server" : {
+            "host" : "http://localhost",
+            "port" : 3001
+        },
         "routes" : {
             "indexRoute" : {
                 "homePage" : { "type" : "get", "component" : "/index", "listener" : "homePage" }

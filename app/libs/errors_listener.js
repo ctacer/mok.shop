@@ -1,6 +1,6 @@
 var errorsListener = function(logger){
 
-    var logger = logger || global.registry.get('logger');
+    var logger = logger || registry.get('log');
 	
 	/**
 	 * Gets string with stack trace to use in logs for the provided error type
@@ -32,16 +32,6 @@ var errorsListener = function(logger){
 	var handleUncaughtException = function(err){
     	var message = getDetailedErrorMessage('UNCAUGHT_ERROR', err);
         logger.error(message);
-        var mailMessage = global.registry.get('smtpClient').createMessage();
-        mailMessage.setBody(message);
-        mailMessage.setSubject("Uncaught error!");
-        mailMessage.send(function(err, message){
-            if(err){
-                logger.error("Failed to send report message.\n\n" + getDetailedErrorMessage('EMAIL_FAILED', err));
-            }else{
-                logger.info("Error report was successfully sent.");
-            }
-        });
 	};
 	
 	/**

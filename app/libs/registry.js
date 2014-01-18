@@ -8,15 +8,15 @@ module.exports = function(){
      * @type {{}}
      * @private
      */
-	this._items = {};
+	var __items = {};
 
     /**
      * Put the object to the registry using given key, replaces the object if it already exists
      * @param key
      * @param instance
      */
-	this.add = function(key, instance){
-		this._items[key] = instance;
+	this.set = function(key, instance){
+        __items[key] = instance;
 	};
 
     /**
@@ -25,9 +25,6 @@ module.exports = function(){
      * @returns {*} object or null if object with given key not found in registry
      */
 	this.get = function(key){
-		if(!(key in this._items)){
-			return null;
-		}
-		return this._items[key];
+		return __items[key];
 	};
 };
