@@ -9,14 +9,21 @@ var config = {
             "host" : "http://localhost",
             "port" : 3001
         },
-        "routes" : {
-            "indexRoute" : {
-                "homePage" : { "type" : "get", "component" : "/index", "listener" : "homePage" }
+        "routes" : [
+            {
+                "router" : "indexRoute",
+                "components" : [
+                    { "type" : "get", "component" : "/index", "listener" : "homePage" },
+                    { "type" : "get", "component" : "/", "listener" : "rootPage" }
+                ]
             },
-            "userRoute" : {
-                "login" : { "type" : "post", "component" : "/login", "listener" : "handleRegistration" }
+            {
+                "router" : "userRoute",
+                "components" : [
+                    { "type" : "post", "component" : "/login", "listener" : "handleRegistration" }
+                ]
             }
-        },
+        ],
         "db" : {
             "host" : 'localhost',
             "port" : 3306,

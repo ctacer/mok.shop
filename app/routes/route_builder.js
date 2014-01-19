@@ -2,22 +2,20 @@
 
 module.exports = function ( app, routes ) {
 
-    var route, subRoute;
+    var route, routeComponents;
 
-    for (var key in routes) {
-        if (!routes.hasOwnProperty (key)) continue;
+    for (var i = 0; i < routes.length; i++) {
 
-        route = registry.get (key);
-        subRoute = routes[key];
-        if (route) {
-            for (var subKey in subRoute) {
-                if (!subRoute.hasOwnProperty (subKey)) continue;
+        route = registry.get (routes[i].router);
+        routeComponents = routes[i].components;
+        if (!route) continue;
 
-                registry.get ('log').info (
-                    "Express listens \t" + subRoute[subKey].type.toUpperCase () + " " + subRoute[subKey].component + " request "
-                );
-                app[subRoute[subKey].type] ( subRoute[subKey].component, route[subRoute[subKey].listener] );
-            }
+        for (var j = 0; j < routeComponents.length; j++) {
+
+            registry.get ('log').info (
+                "Express listens \t" + routeComponents[j].type.toUpperCase () + " '" + routeComponents[j].component + "' request "
+            );
+            app[routeComponents[j].type] ( routeComponents[j].component, route[routeComponents[j].listener] );
         }
     }
 };
