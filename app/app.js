@@ -12,6 +12,7 @@ var path = require('path');
 
 registry.set ('indexRoute', require('./routes/index_route.js'));
 registry.set ('userRoute', require('./routes/user_route.js'));
+registry.set ('dataSender', require('./routes/data_getter.js'));
 
 var app = express();
 

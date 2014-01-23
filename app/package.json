@@ -7,6 +7,8 @@
   },
   "dependencies": {
       "express": "latest",
-      "nlogger": "latest"
+      "nlogger": "latest",
+      "ejs": "latest",
+      "jade": "latest"
   }
 }

@@ -22,6 +22,12 @@ var config = {
                 "components" : [
                     { "type" : "post", "component" : "/login", "listener" : "handleRegistration" }
                 ]
+            },
+            {
+                "router" : "dataSender",
+                "components" : [
+                    { "type" : "get", "component" : "/get/config", "listener" : "getConfig" }
+                ]
             }
         ],
         "db" : {
@@ -35,6 +41,9 @@ var config = {
         "files" : {
             "html" : {
                 "home" : "/views/home.html"
+            },
+            "js" : {
+                "clientConfig" : "/config/client.config.js"
             }
         }
     }
