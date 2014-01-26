@@ -19,6 +19,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || registry.get ('config').server.port );
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded());

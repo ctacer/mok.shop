@@ -20,7 +20,9 @@ var config = {
             {
                 "router" : "userRoute",
                 "components" : [
-                    { "type" : "post", "component" : "/login", "listener" : "handleRegistration" }
+                    { "type" : "post", "component" : "/login", "listener" : "handleRegistration" },
+                    { "type" : "post", "component" : "/user/login", "listener" : "logUser" },
+                    { "type" : "post", "component" : "/user/reg", "listener" : "saveUser" }
                 ]
             },
             {
@@ -40,7 +42,9 @@ var config = {
         },
         "files" : {
             "html" : {
-                "home" : "/views/home.html"
+            },
+            "jade" : {
+                "home" : "/views/home.jade"
             },
             "js" : {
                 "clientConfig" : "/config/client.config.js"

@@ -17,34 +17,39 @@ body {
 
 #header {
   background-color: #4c66a4;
-  padding: 0px 10%;
+  padding: 0px 0px 0px 10%;
   font-size: 16px;
-  height: 40px;
+  height: 70px;
   color: #fff;
 }
 #header>div {
   text-align: center;
-  height: 40px;
-  padding-top: 10px;
+  height: 70px;
+  padding-top: 25px;
   box-sizing: border-box;
   border: 1px solid transparent;
+  -webkit-user-select: none;
+}
+#header>.header-user {
+  padding-top: 5px;
 }
 .header-logo {
   width: 20%;
 }
 .header-nav {
-  width: 60%;
+  width: 50%;
 }
 .header-user {
-  width: 20%;
+  width: 30%;
 }
 #logo-img {
   background-color: #fff;
   color: #4c66a4;
   border-radius: 3px;
-  padding: 4px;
+  padding: 6px;
   font-style: italic;
   font-weight: bold;
+  font-size: 20px;
 }
 #logo-img:hover {
   cursor: pointer;
@@ -56,6 +61,16 @@ body {
   margin: 0px 10px;
   padding: 6px 0px;
   box-sizing: border-box;
+}
+.small-btn {
+  padding: 2px 0px;
+  margin: 0px 4px;
+}
+.header-input {
+
+}
+.header-hidden-btn {
+  width: 0px;
 }
 .header-separator {
   border-right: 1px solid #364c7c;

@@ -1,11 +1,7 @@
 
-/*
- * GET home page.
- */
-
 module.exports.homePage = function(req, res){
-    var homeHtml = registry.get ('dir') + registry.get ('config').files.html.home;
-    res.sendfile(homeHtml);
+    var homeHtml = registry.get ('dir') + registry.get ('config').files.jade.home;
+    res.render(homeHtml, { 'data' : 101 });
 };
 
 module.exports.rootPage = function(req, res){

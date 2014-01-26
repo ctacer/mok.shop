@@ -8,7 +8,7 @@
   "dependencies": {
       "express": "latest",
       "nlogger": "latest",
-      "ejs": "latest",
+      "password-local": "latest",
       "jade": "latest"
   }
 }
