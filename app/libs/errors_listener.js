@@ -1,6 +1,6 @@
 var errorsListener = function(logger){
 
-    var logger = logger || registry.get('log');
+    var logger = logger || global.registry.logger;
 	
 	/**
 	 * Gets string with stack trace to use in logs for the provided error type

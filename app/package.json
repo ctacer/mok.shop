@@ -8,7 +8,10 @@
   "dependencies": {
       "express": "latest",
       "nlogger": "latest",
-      "password-local": "latest",
-      "jade": "latest"
+      "passport": "latest",
+      "passport-local": "latest",
+      "jade": "latest",
+      "mysql": "0.9.x",
+      "mysql-pool": "latest"
   }
 }

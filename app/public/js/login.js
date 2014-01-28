@@ -18,7 +18,7 @@ $ (function () {
 
     $ ("#user-login").on ("click", function (){
         var user = {
-            'name' : $ ("#user-name").val (),
+            'username' : $ ("#user-name").val (),
             'password' : $ ("#user-password").val ()
         };
 
