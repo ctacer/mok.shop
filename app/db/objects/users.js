@@ -20,18 +20,24 @@ module.exports = function () {
             var query =
                 " INSERT INTO UNMAP(user) UNMAP((user.name, user.email, user.password)) " +
                 " SELECT " + db.escape(user.name) + ", " + db.escape(user.email) + ", " + db.escape(user.password) +
-                " FROM UNMAP(user) tu " +
+                " FROM (SELECT 1) ff " +
                 " WHERE NOT EXISTS ( " +
                 " SELECT tu.name " +
                 " FROM UNMAP(user) tu " +
                 " WHERE tu.name = " + db.escape(user.name) +
                 " LIMIT 1 )";
 
-            console.log (mapManager.getQuery(query));
-            //db.execute (query, function(result) {
-                //console.log (arguments);
-                cb ();
-            //});
+            var unMapQuery = mapManager.getQuery(query);
+            console.log (unMapQuery);
+            db.execute (unMapQuery, function(result) {
+                var userIsInserted = true;
+                var err = {};
+                if (result.affectedRows == 0) {
+                    err.message = "user already exists";
+                    userIsInserted = false;
+                }
+                cb ({ "ok" : userIsInserted, "err" : err });
+            });
         },
 
         /**

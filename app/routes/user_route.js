@@ -11,9 +11,14 @@ module.exports.logUserOut = function(req, res){
  * route for registration og the new user
  */
 module.exports.regUser = function(req, res){
-    console.log (req.body);
-    global.registry.db.objects.users.newUser(req.body.user);
-    res.send("respond with a resource");
+    var newUser = {
+        "name" : req.body.name,
+        "email" : req.body.email,
+        "password" : req.body.password
+    };
+    global.registry.db.objects.users.newUser(newUser, function (insertResult) {
+        res.send(insertResult);
+    });
 };
 
 /**

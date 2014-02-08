@@ -43,20 +43,26 @@ var MapManager = function () {
             var index = 0;
             var startIndex, endIndex;
 
-            while ( index < str.length ) {
+            while ( index != -1 ) {
                 index = str.indexOf(unMapPattern);
-                if (index == -1) break;
+                if (index == -1) {
+                    query += str;
+                    break;
+                }
 
-                index += unMapPattern.length;
-                startIndex = findInBracket (str.substring(index));
+                query += str.substring(0, index);
+                str = str.substring(index + unMapPattern.length);
+
+                startIndex = findInBracket (str);
                 if (startIndex != -1) {
-                    startIndex += index + 1;
+                    startIndex++;
                     endIndex = findOutBracket (str.substring(startIndex));
                     if (endIndex == -1) break;
+                    endIndex += startIndex;
 
-                    endIndex += index;
                     query += replaceMaps (str.substring(startIndex, endIndex));
                 }
+                str = str.substring(endIndex+1);
             }
 
         }) ();
@@ -66,7 +72,7 @@ var MapManager = function () {
 
     function findInBracket (str) {
         return str.indexOf("(");
-    };
+    }
 
     function findOutBracket (str) {
         var count = 1;
@@ -93,14 +99,14 @@ var MapManager = function () {
         var map;
         if (self.schemas.hasOwnProperty(parts[0])) {
             map = self.schemas[ parts[0] ];
-            query += "\"" + map.table + "\"";
+            query += "" + map.table + "";
         }
         else {
             query += parts[0];
         }
         if (parts[1]) {
             if (map && map.mappings.hasOwnProperty(parts[1])) {
-                query += ".\"" + map.mappings[ parts[1] ] + "\"";
+                query += "." + map.mappings[ parts[1] ] + "";
             }
             else {
                 query += "." + parts[1];
@@ -113,20 +119,22 @@ var MapManager = function () {
         var query = "";
         var words = str.split (/\s+/);
         var word, mixing = "";
+        var mixings = [",", "(", ")"];
 
         for (var i = 0; i < words.length; i ++) {
             word = words[i];
-            if (word[0] == ",") {
-                query += " , ";
+            if (mixings.indexOf(word[0]) != -1) {
+                query += " " + word[0] + " ";
                 word = word.substring (1);
             }
-            if (word[ word.length ] == ",") {
-                word = word.substring (0, word.length-1 );
-                mixing = " , ";
+            if (mixings.indexOf(word[ word.length - 1 ]) != -1) {
+                mixing = " " + word[ word.length - 1 ] + " ";
+                word = word.substring (0, word.length - 1 );
             }
             query += unMapWord (word) + mixing;
             mixing = "";
         }
+        return query;
     };
 
 

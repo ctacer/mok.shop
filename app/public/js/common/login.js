@@ -69,8 +69,11 @@ $ (function () {
         };
 
         var callback = function (res) {
-            if (res.ok && res.data.user) {
-                requestSucceed(res.data.user.name);
+            if (res.ok) {
+                requestSucceed(user.name);
+            }
+            else {
+                console.log (res.err.message);
             }
         };
 
