@@ -7,10 +7,12 @@ html
     link(type="text/css", rel="stylesheet", href="css/home.css")
     link(type="text/css", rel="stylesheet", href="css/login.css")
 
-    script(type="text/javascript", src="libs/jquery-2.0.2.js")
+    script(type="text/javascript", src="libs/jquery.js")
+    script(type="text/javascript", src="js/common/helper_methods.js")
+    script(type="text/javascript", src="js/common/login.js")
 
     script(type="text/javascript", src="js/index.js")
-    script(type="text/javascript", src="js/login.js")
+
   body
     #header
       .header-logo.header-separator.left
@@ -21,27 +23,27 @@ html
         span#nav-smts.header-btn App
         span#nav-smts2.header-btn Products
       .header-user.left
-        if user
-          span#user-name.header-btn= user.name
-          span#user-logout.header-btn logout
-        else
+        .user-block(class=user?['']:['hidden'])
+          span#user-name.header-btn= user && user.name ? user.name : ""
+          span#logout-user.header-btn logout
+        .login-block(class=user?['hidden']:[''])
           .header-login.left
             .header-label-container
               .header-label.left Email or login
               .header-label.left Password
               .clear
             .header-input-container
-              input#user-name.header-input.left
-              input#user-password.header-input.left(type="password")
+              input#login-user-name.header-input.left
+              input#login-user-password.header-input.left(type="password")
               .clear
             .header-btns-container
               .header-cell.left
-                span#user-registrate.header-btn.small-btn Registrate
+                span#registrate-user.header-btn.small-btn Registrate
               .header-cell.left
                 span#user-reset-password.header-btn.small-btn Forget password?
               .clear
           .header-login-btns.left
-            span#user-login.header-btn login
+            span#login-user.header-btn login
           .clear
       .clear
     .content
