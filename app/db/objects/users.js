@@ -9,7 +9,11 @@ module.exports = function () {
         /**
          * function checks if user already exists in db
          */
-        "checkUserExist" : function (user, cb) {},
+        "checkUserExist" : function (user, cb) {
+            this.findUser({ 'name' : user.name }, function (result) {
+                cb (!!result);
+            });
+        },
 
         /**
          * db function for inserting of the new user into 't_users' db
@@ -28,7 +32,6 @@ module.exports = function () {
                 " LIMIT 1 )";
 
             var unMapQuery = mapManager.getQuery(query);
-            console.log (unMapQuery);
             db.execute (unMapQuery, function(result) {
                 var userIsInserted = true;
                 var err = {};

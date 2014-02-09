@@ -5,9 +5,19 @@ var MapManager = function () {
     var self = this;
 
     this.user = (require ("./mappings/users.js")) (mapProto);
+    this.mark = (require ("./mappings/mark.js")) (mapProto);
+    this.subCategory = (require ("./mappings/sub_category.js")) (mapProto);
+    this.category = (require ("./mappings/category.js")) (mapProto);
+    this.productDescription = (require ("./mappings/product_description.js")) (mapProto);
+    this.product = (require ("./mappings/products.js")) (mapProto);
 
     this.schemas = {
-        'user':(new this.user()).schema
+        'user':(new this.user()).schema,
+        'mark' : this.mark = (new this.mark()).schema,
+        'subCategory' : this.subCategory = (new this.subCategory()).schema,
+        'category' : this.category = (new this.category()).schema,
+        'productDescription' : this.productDescription = (new this.productDescription()).schema,
+        'product' : this.product = (new this.product()).schema
     };
 
     this.map = function (map) {

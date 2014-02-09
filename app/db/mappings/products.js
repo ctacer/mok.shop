@@ -2,21 +2,19 @@
 module.exports = function (proto) {
     var mappingProto = function () {
         this.schema = {
-            "table" : "t_users",
+            "table" : "t_products",
             "mappings" : {
                 "id" : "id",
-                "email" : "email",
-                "name" : "name",
-                "password" : "password",
-                "isAdmin" : "is_admin"
+                "owner" : "owner",
+                "category" : "category",
+                "mark" : "mark"
             }
         };
 
         this.id = null;
-        this.email = null;
-        this.name = null;
-        this.password = null;
-        this.isAdmin = null;
+        this.owner = null;
+        this.category = null;
+        this.mark = null;
     };
 
     mappingProto.prototype = proto;

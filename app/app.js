@@ -24,6 +24,7 @@ global.registry.db.modules.mapManager = require("./db/db_map_manager.js");
 global.registry.db.modules.gateway = require("./db/db_gateway.js") (global.registry.config);
 global.registry.db.objects = {};
 global.registry.db.objects.users = require('./db/objects/users.js') ();
+global.registry.db.objects.pproducts = require('./db/objects/products.js') ();
 
 //init function
 (function () {
